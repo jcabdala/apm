@@ -10,15 +10,45 @@ import sys
 import os.path
 from prettytable import PrettyTable
 
+GITHUB_URL = 'https://api.github.com/'
+
+# Custom user agent
+headers = {'User-Agent': 'jcabdala/apm'}
+
+sources = {'Adafruit': 'adafruit'}
+
+
 def find_repositories(word):
-    dircc = "https://api.github.com/search/repositories?q="+word+"+arduino+library&sort=forks&order=desc"
+    dircc = GITHUB_URL + "search/repositories?q=" + word + "+arduino+library&sort=forks&order=desc"
     print dircc
     repositories = requests.get(dircc)
     return repositories.json()
 
 
+def search_library(limit=30):
+    results = []
+    for source in sources:
+        payload = {'q': 'arduino+library',
+                   'sort': 'forks',
+                   'order': 'desc',
+                   'per_page': limit}
+        r = requests.get(GITHUB_URL + 'search/repositories',
+                         params=payload,
+                         headers=headers)
+
+        for i, repo in enumerate(r.json()['items']):
+            name = repo['name']
+            forks = repo['forks_count']
+            r2 = requests.get(repo['url'])
+            stars = r2.json()['stargazers_count']
+            print stars
+            print '{}) {}/{} [{}]{}'.format(i + 1, source, name, forks, '*' * stars)
+            results.append(repo)
+    return results
+
+
 def display_repo(repositories):
-    t = PrettyTable(['Index', 'name', 'user',  'forks', 'starts', "last update"])
+    t = PrettyTable(['Index', 'name', 'user', 'forks', 'starts', "last update"])
     for rep in repositories["items"][:5]:
         t.add_row(["1", rep["name"], rep["owner"]["login"], rep["forks"], rep["stargazers_count"], rep["updated_at"]])
     print t
@@ -31,7 +61,7 @@ def get_repo(repositories, index):
     return myrepo, namerepo, nameuser
 
 
-def downloadrepo(repourl, name, user):
+def download_repo(repourl, name, user):
     home_folder = os.path.expanduser('~')
     repodir = home_folder + config.arduinolib + name + "-" + user
     print repodir
@@ -61,7 +91,7 @@ def main(argv):
         if argv[2] == "-lucky":
             repositories = find_repositories(argv[3])
             repo, name, user = get_repo(repositories, 0)
-            downloadrepo(repo, name, user)
+            download_repo(repo, name, user)
             print "The example's dir name is: ", name, "-", user
 
         else:
@@ -72,7 +102,7 @@ def main(argv):
             except ValueError:
                 print "Not a number"
             repo, name, user = get_repo(repositories, num)
-            downloadrepo(repo, name, user)
+            download_repo(repo, name, user)
             print "The example's dir name is: ", name, "-", user
 
 
