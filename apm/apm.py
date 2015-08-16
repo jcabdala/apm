@@ -84,6 +84,14 @@ def freeze():
     return sorted(libraries)
 
 
+def uninstall(library_name):
+    libraries = []
+    for dirname, dirnames, filenames in os.walk(config.arduinohome):
+        if library_name in dirnames:
+            libraries.append(library_name)
+    return sorted(libraries)
+
+
 def main(argv):
     if argv[1] == "install":
         repositories = find_repositories(argv[3])
