@@ -16,8 +16,6 @@ def find_repositories(word):
     repositories = requests.get(dircc)
     return repositories.json()
 
-#def display_repo(repositories):
-#    for rep in repositories:
 
 def get_repo(repositories, index):
     myrepo = repositories["items"][index]["clone_url"]
@@ -37,15 +35,27 @@ def downloadrepo(repourl, name, user):
         print "git url error"
 
 
+def freeze():
+    libraries = []
+    for dirname, dirnames, filenames in os.walk(config.arduinohome):
+        if '.git' in dirnames:
+            # don't go into any .git directories.
+            # dirnames.remove('.git')
+            library = os.path.basename(dirname)
+            libraries.append(library)
+            print '{} - {}'.format(os.path.basename(dirname), dirname)
+    return sorted(libraries)
+
+
 def main(argv):
     if argv[1] == "install":
         repositories = find_repositories(argv[3])
-        #print repositories
+        #`print repositories
         if argv[2] == "-lucky":
             repo, name, user = get_repo(repositories, 0)
             downloadrepo(repo, name, user)
             print "The example's dir name is: ", name, "-", user
-        #else:
+        # else:
 
 
 main(sys.argv)
