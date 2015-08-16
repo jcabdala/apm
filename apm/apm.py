@@ -5,6 +5,7 @@ import requests
 import config
 import git
 from git import Repo
+import os
 import sys
 import os.path
 
@@ -48,4 +49,3 @@ def main(argv):
 
 
 main(sys.argv)
-
