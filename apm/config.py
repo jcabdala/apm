@@ -1,0 +1,1 @@
+arduinohome = "~/Arduino/libraries/"

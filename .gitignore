@@ -1,28 +1,60 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
+# C extensions
 *.so
-*.dylib
-*.dll
 
-# Fortran module files
-*.mod
+# Distribution / packaging
+pip-selfcheck.json
+*sqlite3
+.Python
+env/
+bin/
+include/
+local/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Executables
-*.exe
-*.out
-*.app
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Django stuff:
+*.log
+*.pot
+local_settings.py
+
+# Sphinx documentation
+docs/_build/
+
+*.sqlite3
