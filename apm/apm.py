@@ -74,7 +74,7 @@ def download_repo(repourl, name, user):
 
 def freeze():
     libraries = []
-    for dirname, dirnames, filenames in os.walk(config.arduinohome):
+    for dirname, dirnames, filenames in os.walk(config.arduinolib):
         if '.git' in dirnames:
             # don't go into any .git directories.
             # dirnames.remove('.git')
@@ -86,9 +86,11 @@ def freeze():
 
 def uninstall(library_name):
     libraries = []
-    for dirname, dirnames, filenames in os.walk(config.arduinohome):
-        if library_name in dirnames:
-            libraries.append(library_name)
+    for dirname, dirnames, filenames in os.walk(config.arduinolib):
+        if '.git' in dirnames and library_name in dirname:
+            library = os.path.basename(dirname)
+            libraries.append(library)
+            print '{} - {}'.format(os.path.basename(dirname), dirname)
     return sorted(libraries)
 
 
