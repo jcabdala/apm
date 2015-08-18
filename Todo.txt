@@ -1,0 +1,11 @@
+To do list:
+
+dd-mm-YYY
+18-08-2015
+
+*Doc. the methods
+*Finish unistall and seach funtionc
+*Create a pip pakage with https://packaging.python.org/en/latest/distributing.html and http://cookiecutter.readthedocs.org/en/latest/
+ej https://github.com/audreyr/cookiecutter-pypackage
+*Create a real index.
+
