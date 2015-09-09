@@ -1,37 +1,45 @@
 APM
 ====
-Arduino Package Manager now is only a Arduino's finder and installer package from git hub. In the future it will be **similar** to pip.
+Arduino Package Manager is an Arduino package finder and installer. It searchs in
+GitHub repositories for Arduino libraries.
+In the future it will be **similar** to pip tool.
 
 Getting started
 ===============
 
-Only for Arduino >= 1.6
+It only works for Arduino >= 1.6
 
-Installs:
+Install:
 
-git clone git@github.com:jcabdala/apm.git
-cd apm
-sudo pip install -r requirements.txt
-
+```
+$ git clone git@github.com:jcabdala/apm.git
+$ cd apm
+$ sudo pip install -r requirements.txt
+```
 
 Use:
 
-*Standar mode*:
+*Standard mode*:
 
-This mode find in github the package with more forks and shows the 5 first options. 
-When you choice one, apm clones the repositorie in /home/<user>/Arduino/libraries/. 
+This mode finds in GitHub the package with more forks and shows the 5 first options. 
+When you choice one, apm clones the selected repository in `/home/<user>/Arduino/libraries/`. 
+```
+$ python apm.py install [name of component]
+```
 
-$python apm.py install [name of component]
+For example:
+```
+$ python apm.py install dht
+```
 
-Ej: python apm.py install dht
+*Lucky mode*:
 
+It downloads and installs the first option by default.
+```
+$ python apm.py install -lucky [name of component] 
+```
 
-*Lucking mode*:
-
-Download and install the first options by default.
- 
-$python apm.py install -lucky [name of component] 
-
-Ej: python apm.py install -lucky dht
-
-
+For example:
+```
+python apm.py install -lucky dht
+```
